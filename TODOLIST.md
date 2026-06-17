@@ -39,9 +39,9 @@
   - [x] Ajouter le bouton **Valider**.
 - [ ] **Logique de Session (Dans `CaisseController`)** :
   - [x] Créer la méthode `validerCaisse()`.
-  - [ ] Récupérer le `caisse_id` envoyé en POST via `$this->request->getPost('caisse_id')`.
-  - [ ] Récupérer les détails de cette caisse et les stocker en session : `session()->set('caisse_active', $caisse);`.
-  - [ ] Rediriger l'utilisateur vers la page des achats : `return redirect()->to('/achats');`.
+  - [x] Récupérer le `caisse_id` envoyé en POST via `$this->request->getPost('caisse_id')`.
+  - [x] Récupérer les détails de cette caisse et les stocker en session : `session()->set('caisse_active', $caisse);`.
+  - [x] Rediriger l'utilisateur vers la page des achats : `return redirect()->to('/achats');`.
 
 ---
 
