@@ -8,9 +8,6 @@ use App\Models\ProduiModel;
 
 class AchatController extends BaseController
 {
-    /**
-     * Affiche le tableau récapitulatif des achats en cours pour la caisse active.
-     */
     public function index()
     {
         $caisseId = session()->get('caisse_active');
@@ -40,10 +37,6 @@ class AchatController extends BaseController
         return view('achats/saisie', $data);
     }
 
-    /**
-     * Ajoute un produit au panier de la caisse active, puis crée la ligne
-     * d'achat correspondante avec le statut 'en_cours'.
-     */
     public function ajouter()
     {
         $caisseId  = session()->get('caisse_active');
