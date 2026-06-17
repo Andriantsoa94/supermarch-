@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateSoldes extends Migration
+class CreateAchat extends Migration
 {
     public function up()
     {
@@ -13,35 +13,28 @@ class CreateSoldes extends Migration
                 'type'           => 'INTEGER',
                 'auto_increment' => true,
             ],
-            'employe_id' => [
+            'produit_id' => [
                 'type'       => 'INTEGER',
                 'null'       => false,
             ],
-            'type_conge_id' => [
+            
+            'quantite' => [
                 'type'       => 'INTEGER',
                 'null'       => false,
             ],
-            'annee' => [
-                'type'       => 'TEXT',
-                'null'       => false,
-            ],
-            'jours_attribues' => [
+            'statut' => [
                 'type'       => 'INTEGER',
                 'null'       => false,
-            ],
-            'jours_pris' => [
-                'type'       => 'INTEGER',
-                'null'       => false,
-            ],
+            ]
+            
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('employe_id', 'employes', 'id');
-        $this->forge->addForeignKey('type_conge_id', 'types_conge', 'id');
-        $this->forge->createTable('soldes');
+        $this->forge->addForeignKey('produit_id', 'produit', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('achat');
     }
 
     public function down()
     {
-        $this->forge->dropTable('soldes');
+        $this->forge->dropTable('achat');
     }
 }
