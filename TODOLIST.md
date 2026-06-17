@@ -34,11 +34,11 @@
 - [x] **Modèle** : Créer `app/Models/CaisseModel.php`.
 - [x] **Contrôleur** : Créer `app/Controllers/CaisseController.php`.
   - [x] Méthode `index()` : Charger `CaisseModel`, récupérer toutes les caisses avec `findAll()`, et envoyer les données à la vue de sélection.
-- [ ] **Vue** : Créer `app/Views/caisse/selection.php`.
-  - [ ] Intégrer la liste déroulante `<select name="caisse_id">` alimentée dynamiquement par la base de données.
-  - [ ] Ajouter le bouton **Valider**.
+- [x] **Vue** : Créer `app/Views/caisse/selection.php`.
+  - [x] Intégrer la liste déroulante `<select name="caisse_id">` alimentée dynamiquement par la base de données.
+  - [x] Ajouter le bouton **Valider**.
 - [ ] **Logique de Session (Dans `CaisseController`)** :
-  - [ ] Créer la méthode `valider_caisse()`.
+  - [x] Créer la méthode `validerCaisse()`.
   - [ ] Récupérer le `caisse_id` envoyé en POST via `$this->request->getPost('caisse_id')`.
   - [ ] Récupérer les détails de cette caisse et les stocker en session : `session()->set('caisse_active', $caisse);`.
   - [ ] Rediriger l'utilisateur vers la page des achats : `return redirect()->to('/achats');`.
@@ -94,7 +94,7 @@ $routes->get('/', 'AuthController::login');
 $routes->post('/auth/authentifier', 'AuthController::authentifier');
 
 $routes->get('/caisse', 'CaisseController::index');
-$routes->post('/caisse/valider', 'CaisseController::valider_caisse');
+$routes->post('/caisse/valider', 'CaisseController::validerCaisse');
 
 $routes->get('/achats', 'AchatController::index');
 $routes->post('/achats/ajouter', 'AchatController::ajouter');

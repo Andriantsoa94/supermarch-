@@ -22,4 +22,11 @@ class CaisseController extends BaseController
             return view('caisse/selection', $data);
         }
     }
+
+    function validerCaisse() {
+        $caisse = $this->request->getPost('caisse_id');
+        session()->set('caisse_active', $caisse);
+
+        return redirect()->to('/achats');
+    }
 }
