@@ -32,8 +32,8 @@
 
 ## Étape 3 : Choix de la Caisse (45 min)
 - [x] **Modèle** : Créer `app/Models/CaisseModel.php`.
-- [ ] **Contrôleur** : Créer `app/Controllers/CaisseController.php`.
-  - [ ] Méthode `index()` : Charger `CaisseModel`, récupérer toutes les caisses avec `findAll()`, et envoyer les données à la vue de sélection.
+- [x] **Contrôleur** : Créer `app/Controllers/CaisseController.php`.
+  - [x] Méthode `index()` : Charger `CaisseModel`, récupérer toutes les caisses avec `findAll()`, et envoyer les données à la vue de sélection.
 - [ ] **Vue** : Créer `app/Views/caisse/selection.php`.
   - [ ] Intégrer la liste déroulante `<select name="caisse_id">` alimentée dynamiquement par la base de données.
   - [ ] Ajouter le bouton **Valider**.
