@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProduiModel extends Model
+class PanierModel extends Model
 {
-    protected $table            = 'produit';
+    protected $table            = 'panier';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['designation','prix','stock'];
+    protected $allowedFields    = ['produit_id', 'quantite'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -43,9 +43,4 @@ class ProduiModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function getAllProduit() {
-        $prod = $this->findAll();
-        return $prod;
-    }
 }

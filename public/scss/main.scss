@@ -1,0 +1,467 @@
+@use "sass:color";
+// ============================================================
+//  CAISSE SUPERMARCHÉ — Design System
+//  Palette : vert épicerie + blanc cassé + accents chauds
+// ============================================================
+
+// --- Tokens ---
+$color-bg:           #F2F4F0;
+$color-surface:      #FFFFFF;
+$color-brand:        #1A6B3A;       // vert épicerie profond
+$color-brand-light:  #E8F5EE;
+$color-brand-mid:    #2E8B57;
+$color-accent:       #E8722A;       // orange caisse
+$color-text:         #1C1C1C;
+$color-muted:        #6B7280;
+$color-border:       #D1D5DB;
+$color-error-bg:     #FEF2F2;
+$color-error-text:   #991B1B;
+$color-error-border: #FECACA;
+$color-success:      #166534;
+$color-success-bg:   #DCFCE7;
+$color-table-head:   #F0F7F3;
+
+$radius-sm:    6px;
+$radius-md:    10px;
+$radius-lg:    16px;
+
+$shadow-card:  0 2px 16px rgba(26, 107, 58, 0.10), 0 1px 4px rgba(0,0,0,0.06);
+$shadow-input: 0 1px 3px rgba(0,0,0,0.07);
+
+$font-display: 'Sora', 'Segoe UI', Arial, sans-serif;
+$font-body:    'Inter', 'Segoe UI', Arial, sans-serif;
+
+// ============================================================
+//  Reset & Base
+// ============================================================
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: $font-body;
+  background-color: $color-bg;
+  color: $color-text;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+// ============================================================
+//  Layout helpers
+// ============================================================
+.page-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.page-body {
+  padding: 28px 20px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+// ============================================================
+//  Card
+// ============================================================
+.card {
+  background: $color-surface;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+  padding: 36px 40px;
+
+  &--narrow {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  &--wide {
+    width: 100%;
+    max-width: 720px;
+  }
+}
+
+// ============================================================
+//  Brand header (dans les cards)
+// ============================================================
+.brand-header {
+  text-align: center;
+  margin-bottom: 32px;
+
+  .brand-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: $color-brand;
+    border-radius: 14px;
+    margin-bottom: 14px;
+
+    svg {
+      width: 30px;
+      height: 30px;
+      fill: #fff;
+    }
+  }
+
+  h1 {
+    font-family: $font-display;
+    font-size: 22px;
+    font-weight: 700;
+    color: $color-text;
+    margin: 0 0 4px;
+    letter-spacing: -0.3px;
+  }
+
+  p {
+    font-size: 13px;
+    color: $color-muted;
+    margin: 0;
+  }
+}
+
+// ============================================================
+//  Form elements
+// ============================================================
+.form-group {
+  margin-bottom: 18px;
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: $color-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 7px;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid $color-border;
+    border-radius: $radius-sm;
+    font-size: 15px;
+    font-family: $font-body;
+    color: $color-text;
+    background: $color-surface;
+    box-shadow: $shadow-input;
+    transition: border-color 0.18s, box-shadow 0.18s;
+    appearance: none;
+
+    &:focus {
+      outline: none;
+      border-color: $color-brand-mid;
+      box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.14);
+    }
+
+    &::placeholder {
+      color: #BDBDBD;
+      font-size: 14px;
+    }
+  }
+
+  input[type="number"] {
+    width: 90px;
+  }
+
+  // Hint sous le champ
+  .field-hint {
+    margin-top: 6px;
+    font-size: 12px;
+    color: $color-muted;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    .hint-value {
+      font-family: monospace;
+      background: $color-brand-light;
+      color: $color-brand;
+      padding: 1px 7px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 12px;
+    }
+  }
+}
+
+// ============================================================
+//  Buttons
+// ============================================================
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: $radius-sm;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: $font-body;
+  cursor: pointer;
+  border: none;
+  transition: background 0.17s, transform 0.1s, box-shadow 0.17s;
+  text-decoration: none;
+
+  &:active { transform: scale(0.98); }
+
+  &--primary {
+    background: $color-brand;
+    color: #fff;
+    width: 100%;
+    padding: 13px;
+    margin-top: 8px;
+    box-shadow: 0 2px 8px rgba(26,107,58,0.22);
+
+    &:hover {
+      background: $color-brand-mid;
+      box-shadow: 0 4px 14px rgba(26,107,58,0.28);
+    }
+  }
+
+  &--success {
+    background: $color-brand;
+    color: #fff;
+
+    &:hover { background: color.adjust($color-brand, $lightness: -6%); }
+  }
+
+  &--success-full {
+    background: $color-brand;
+    color: #fff;
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: $radius-md;
+    box-shadow: 0 2px 8px rgba(26,107,58,0.22);
+
+    &:hover { background: $color-brand-mid; }
+    &:disabled {
+      background: #9CA3AF;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+  }
+
+  &--secondary {
+    background: $color-bg;
+    color: $color-text;
+    border: 1.5px solid $color-border;
+
+    &:hover { background: color.adjust($color-bg, $lightness: -3%); }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: $color-muted;
+    font-size: 13px;
+    padding: 6px 10px;
+
+    &:hover { color: $color-brand; background: $color-brand-light; }
+  }
+}
+
+// ============================================================
+//  Alerts / Messages
+// ============================================================
+.alert {
+  border-radius: $radius-sm;
+  padding: 12px 16px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  &--error {
+    background: $color-error-bg;
+    color: $color-error-text;
+    border: 1px solid $color-error-border;
+  }
+
+  &--success {
+    background: $color-success-bg;
+    color: $color-success;
+    border: 1px solid #86EFAC;
+  }
+
+  .alert-icon { flex-shrink: 0; font-size: 16px; }
+}
+
+// ============================================================
+//  Top bar (pages intérieures)
+// ============================================================
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1.5px solid $color-border;
+
+  .top-bar__title {
+    font-family: $font-display;
+    font-size: 20px;
+    font-weight: 700;
+    color: $color-text;
+    margin: 0;
+
+    span {
+      font-size: 14px;
+      font-weight: 500;
+      color: $color-muted;
+      margin-left: 8px;
+    }
+  }
+}
+
+// ============================================================
+//  Inline form (ajout produit)
+// ============================================================
+.form-inline {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+  background: $color-brand-light;
+  border: 1.5px solid color.adjust($color-brand-light, $lightness: -8%);
+  border-radius: $radius-md;
+  padding: 18px 20px;
+
+  .form-group {
+    margin-bottom: 0;
+
+    label { color: $color-brand; }
+  }
+}
+
+// ============================================================
+//  Table
+// ============================================================
+.table-wrap {
+  border: 1.5px solid $color-border;
+  border-radius: $radius-md;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    background: $color-table-head;
+    color: $color-muted;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 11px 14px;
+    text-align: left;
+    border-bottom: 1.5px solid $color-border;
+  }
+
+  td {
+    padding: 11px 14px;
+    font-size: 14px;
+    border-bottom: 1px solid #F0F0F0;
+    color: $color-text;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  tbody tr:hover td { background: $color-brand-light; }
+
+  tfoot td {
+    font-weight: 700;
+    background: $color-table-head;
+    font-size: 15px;
+    border-top: 1.5px solid $color-border;
+  }
+
+  .td-amount {
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    color: $color-brand;
+  }
+
+  .td-empty {
+    text-align: center;
+    color: $color-muted;
+    font-style: italic;
+    padding: 28px;
+  }
+}
+
+// ============================================================
+//  Caisse selection
+// ============================================================
+.caisse-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+
+  .caisse-option {
+    label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      border: 2px solid $color-border;
+      border-radius: $radius-md;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      font-weight: 500;
+      font-size: 15px;
+
+      &:hover {
+        border-color: $color-brand-mid;
+        background: $color-brand-light;
+      }
+    }
+
+    input[type="radio"] {
+      accent-color: $color-brand;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    input[type="radio"]:checked + label,
+    &:has(input:checked) label {
+      border-color: $color-brand;
+      background: $color-brand-light;
+      color: $color-brand;
+    }
+  }
+}
+
+// ============================================================
+//  Divider
+// ============================================================
+.divider {
+  border: none;
+  border-top: 1.5px solid $color-border;
+  margin: 24px 0;
+}
+
+// ============================================================
+//  Footer note
+// ============================================================
+.login-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 12px;
+  color: $color-muted;
+}

@@ -18,15 +18,15 @@
 ---
 
 ## Étape 2 : Configuration & Architecture (30 min)
-- [ ] **Fichier `.env` ou `app/Config/Database.php`** :
-  - [ ] Passer l'environnement en mode `development`.
-  - [ ] Configurer le driver sur `SQLite3`.
-  - [ ] Renseigner le chemin absolu ou relatif vers `caisse.db`.
-- [ ] **Fichier `app/Config/App.php`** :
-  - [ ] Configurer `$baseURL` (ex: `http://localhost:8080/`).
-- [ ] **Dossier `app/Views/templates/`** (Découpage du template fourni) :
-  - [ ] Créer `header.php` (Inclure le CSS, la zone d'affichage dynamique de la caisse active via la session, et la barre de navigation).
-  - [ ] Créer `footer.php` (Fermeture des balises HTML, scripts JS facultatifs).
+- [x] **Fichier `.env` ou `app/Config/Database.php`** :
+  - [x] Passer l'environnement en mode `development`.
+  - [x] Configurer le driver sur `SQLite3`.
+  - [x] Renseigner le chemin absolu ou relatif vers `caisse.db`.
+- [x] **Fichier `app/Config/App.php`** :
+  - [x] Configurer `$baseURL` (ex: `http://localhost:8080/`).
+- [x] **Dossier `app/Views/templates/`** (Découpage du template fourni) :
+  - [x] Créer `header.php` (Inclure le CSS, la zone d'affichage dynamique de la caisse active via la session, et la barre de navigation).
+  - [x] Créer `footer.php` (Fermeture des balises HTML, scripts JS facultatifs).
 
 ---
 
@@ -37,7 +37,7 @@
 - [x] **Vue** : Créer `app/Views/caisse/selection.php`.
   - [x] Intégrer la liste déroulante `<select name="caisse_id">` alimentée dynamiquement par la base de données.
   - [x] Ajouter le bouton **Valider**.
-- [ ] **Logique de Session (Dans `CaisseController`)** :
+- [x] **Logique de Session (Dans `CaisseController`)** :
   - [x] Créer la méthode `validerCaisse()`.
   - [x] Récupérer le `caisse_id` envoyé en POST via `$this->request->getPost('caisse_id')`.
   - [x] Récupérer les détails de cette caisse et les stocker en session : `session()->set('caisse_active', $caisse);`.
@@ -46,56 +46,46 @@
 ---
 
 ## Étape 4 : Saisie des Achats (1h45)
-- [ ] **Modèles** : 
+- [x] **Modèles** : 
   - [x] Créer `app/Models/ProduitModel.php`.
-  - [ ] Créer `app/Models/AchatModel.php` (Écrire une méthode personnalisée `getAchatsEnCours($caisse_id)` qui fait un `$this->select(...)->join('produit', ...)->where(...)` pour récupérer la désignation et le prix unitaire).
-- [ ] **Contrôleur** : Créer `app/Controllers/AchatController.php`.
-  - [ ] Dans le constructeur ou la méthode : vérifier si `session()->has('caisse_active')`. Si absent -> rediriger immédiatement vers le choix de la caisse (`/caisse`).
-  - [ ] Méthode `index()` :
-    - [ ] Récupérer la liste de tous les produits (pour le formulaire du haut).
-    - [ ] Récupérer les achats en cours associés à la caisse active (pour le tableau du bas).
-    - [ ] Calculer la somme totale des montants (`prix * quantite`) cumulés.
-    - [ ] Envoyer toutes ces données à la vue.
-- [ ] **Vue** : Créer `app/Views/achats/saisie.php`.
-  - [ ] **Partie Haute : Formulaire d'ajout (60 min)** :
-    - [ ] Créer le formulaire avec le `<select name="produit_id">` bouclant sur les produits disponibles.
-    - [ ] Ajouter le champ de saisie numérique `<input type="number" name="quantite" min="1">`.
-    - [ ] Ajouter le bouton **Valider** pointant vers la route d'ajout.
-  - [ ] **Partie Basse : Tableau récapitulatif (45 min)** :
-    - [ ] Créer la structure du tableau HTML (`Produit`, `Prix Unit`, `Qté`, `Montant`).
-    - [ ] Faire une boucle `foreach` sur les achats en cours récupérés.
-    - [ ] Afficher la ligne `Total` finale en affichant la variable de somme calculée dans le contrôleur.
-- [ ] **Logique d'Ajout (Dans `AchatController`)** :
-  - [ ] Créer la méthode `ajouter()`.
-  - [ ] Récupérer les données POST (`produit_id`, `quantite`) ainsi que le `caisse_id` stocké en session.
-  - [ ] Insérer une nouvelle ligne dans la table `achat` avec le statut 'en_cours'.
-  - [ ] Rediriger vers la page principale des achats : `return redirect()->to('/achats');`.
+  - [x] Créer `app/Models/AchatModel.php` (Écrire une méthode personnalisée `getAchatsEnCours($caisse_id)` qui fait un `$this->select(...)->join('produit', ...)->where(...)` pour récupérer la désignation et le prix unitaire).
+- [x] **Contrôleur** : Créer `app/Controllers/AchatController.php`.
+  - [x] Dans le constructeur ou la méthode : vérifier si `session()->has('caisse_active')`. Si absent -> rediriger immédiatement vers le choix de la caisse (`/caisse`).
+  - [x] Méthode `index()` :
+    - [x] Récupérer la liste de tous les produits (pour le formulaire du haut).
+    - [x] Récupérer les achats en cours associés à la caisse active (pour le tableau du bas).
+    - [x] Calculer la somme totale des montants (`prix * quantite`) cumulés.
+    - [x] Envoyer toutes ces données à la vue.
+- [x] **Vue** : Créer `app/Views/achats/saisie.php`.
+  - [x] **Partie Haute : Formulaire d'ajout (60 min)** :
+    - [x] Créer le formulaire avec le `<select name="produit_id">` bouclant sur les produits disponibles.
+    - [x] Ajouter le champ de saisie numérique `<input type="number" name="quantite" min="1">`.
+    - [x] Ajouter le bouton **Valider** pointant vers la route d'ajout.
+  - [x] **Partie Basse : Tableau récapitulatif (45 min)** :
+    - [x] Créer la structure du tableau HTML (`Produit`, `Prix Unit`, `Qté`, `Montant`).
+    - [x] Faire une boucle `foreach` sur les achats en cours récupérés.
+    - [x] Afficher la ligne `Total` finale en affichant la variable de somme calculée dans le contrôleur.
+- [x] **Logique d'Ajout (Dans `AchatController`)** :
+  - [x] Créer la méthode `ajouter()`.
+  - [x] Récupérer les données POST (`produit_id`, `quantite`) ainsi que le `caisse_id` stocké en session.
+  - [x] Insérer une nouvelle ligne dans la table `achat` avec le statut 'en_cours'.
+  - [x] Rediriger vers la page principale des achats : `return redirect()->to('/achats');`.
 
 ---
 
 ## Étape 5 : Fonctionnalités Avancées (Travaux à faire 4)
-- [ ] **Authentification (Écran de Login)** :
-  - [ ] Créer `app/Controllers/AuthController.php` (Méthodes `login()` pour afficher la vue et `authentifier()` pour vérifier les identifiants en base).
-  - [ ] Créer la vue de connexion `app/Views/auth/login.php`.
-  - [ ] Mettre à jour la session en cas de succès : `session()->set('isLoggedIn', true);`.
-  - [ ] Ajouter un filtre ou une condition stricte pour interdire l'accès à l'application si l'utilisateur n'est pas connecté.
-- [ ] **Bouton "Clôturer Achat"** :
-  - [ ] Ajouter le bouton `<button>` ou lien de clôture juste en dessous du tableau récapitulatif dans `app/Views/achats/saisie.php`.
-  - [ ] Créer la méthode `cloturer()` dans `AchatController.php`.
-  - [ ] Exécuter une requête de mise à jour (`UPDATE`) dans la table `achat` pour passer le statut de 'en_cours' à 'cloture' pour toutes les lignes correspondant à l'ID de la caisse active.
-  - [ ] Rediriger vers `/achats` (le tableau se rechargera vide, prêt pour le client suivant).
+- [x] **Authentification (Écran de Login)** :
+  - [x] Créer `app/Controllers/AuthController.php` (Méthodes `login()` pour afficher la vue et `authentifier()` pour vérifier les identifiants en base).
+  - [x] Créer la vue de connexion `app/Views/auth/login.php`.
+  - [x] Mettre à jour la session en cas de succès : `session()->set('isLoggedIn', true);`.
+  - [x] Ajouter un filtre ou une condition stricte pour interdire l'accès à l'application si l'utilisateur n'est pas connecté.
+- [x] **Bouton "Clôturer Achat"** :
+  - [x] Ajouter le bouton `<button>` ou lien de clôture juste en dessous du tableau récapitulatif dans `app/Views/achats/saisie.php`.
+  - [x] Créer la méthode `cloturer()` dans `AchatController.php`.
+  - [x] Exécuter une requête de mise à jour (`UPDATE`) dans la table `achat` pour passer le statut de 'en_cours' à 'cloture' pour toutes les lignes correspondant à l'ID de la caisse active.
+  - [x] Rediriger vers `/achats` (le tableau se rechargera vide, prêt pour le client suivant).
 
 ---
 
 ## Configuration des Routes (`app/Config/Routes.php`)
 Assurer l'enchaînement des écrans en déclarant les routes suivantes :
-```php
-$routes->get('/', 'AuthController::login');
-$routes->post('/auth/authentifier', 'AuthController::authentifier');
-
-$routes->get('/caisse', 'CaisseController::index');
-$routes->post('/caisse/valider', 'CaisseController::validerCaisse');
-
-$routes->get('/achats', 'AchatController::index');
-$routes->post('/achats/ajouter', 'AchatController::ajouter');
-$routes->post('/achats/cloturer', 'AchatController::cloturer');
