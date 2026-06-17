@@ -47,7 +47,7 @@
 
 ## Étape 4 : Saisie des Achats (1h45)
 - [ ] **Modèles** : 
-  - [ ] Créer `app/Models/ProduitModel.php`.
+  - [x] Créer `app/Models/ProduitModel.php`.
   - [ ] Créer `app/Models/AchatModel.php` (Écrire une méthode personnalisée `getAchatsEnCours($caisse_id)` qui fait un `$this->select(...)->join('produit', ...)->where(...)` pour récupérer la désignation et le prix unitaire).
 - [ ] **Contrôleur** : Créer `app/Controllers/AchatController.php`.
   - [ ] Dans le constructeur ou la méthode : vérifier si `session()->has('caisse_active')`. Si absent -> rediriger immédiatement vers le choix de la caisse (`/caisse`).
