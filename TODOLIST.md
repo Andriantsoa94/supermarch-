@@ -4,16 +4,16 @@
 ---
 
 ## Étape 1 : Base de Données SQLite (30 min)
-- [ ] Créer le fichier de base de données vide (ex: `caisse.db` dans `writable/` ou à la racine).
-- [ ] Rédiger et exécuter le script de création des tables (`schema.sql`) :
-  - [ ] **Table `caisse`** : `id` (INT Autoincrement), `numero` (INT/VARCHAR).
-  - [ ] **Table `produit`** : `id` (INT Autoincrement), `designation` (VARCHAR), `prix` (NUMERIC), `stock` (INT).
-  - [ ] **Table `achat`** : `id` (INT Autoincrement), `caisse_id` (INT), `produit_id` (INT), `quantite` (INT), `statut` (VARCHAR, ex: 'en_cours' ou 'cloture').
-  - [ ] **Table `utilisateur`** : `id` (INT Autoincrement), `username` (VARCHAR), `password` (VARCHAR).
-- [ ] Insérer les données de test obligatoires :
-  - [ ] **2 caisses** (ex: Caisse 1, Caisse 2).
-  - [ ] **5 produits** (ex: Biscuit [1000], Pain [400], Eau [1500], etc.).
-  - [ ] **1 utilisateur** pour le futur login (ex: admin / admin123).
+- [x] Créer le fichier de base de données vide (ex: `caisse.db` dans `writable/` ou à la racine).
+- [x] Rédiger et exécuter le script de création des tables (`schema.sql`) :
+  - [x] **Table `caisse`** : `id` (INT Autoincrement), `numero` (INT/VARCHAR).
+  - [x] **Table `produit`** : `id` (INT Autoincrement), `designation` (VARCHAR), `prix` (NUMERIC), `stock` (INT).
+  - [x] **Table `achat`** : `id` (INT Autoincrement), `caisse_id` (INT), `produit_id` (INT), `quantite` (INT), `statut` (VARCHAR, ex: 'en_cours' ou 'cloture').
+  - [x] **Table `utilisateur`** : `id` (INT Autoincrement), `username` (VARCHAR), `password` (VARCHAR).
+- [x] Insérer les données de test obligatoires :
+  - [x] **2 caisses** (ex: Caisse 1, Caisse 2).
+  - [x] **5 produits** (ex: Biscuit [1000], Pain [400], Eau [1500], etc.).
+  - [x] **1 utilisateur** pour le futur login (ex: admin / admin123).
 
 ---
 

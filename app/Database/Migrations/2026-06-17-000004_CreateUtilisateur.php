@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateDepartements extends Migration
+class CreateUtilisateur extends Migration
 {
     public function up()
     {
@@ -14,20 +14,21 @@ class CreateDepartements extends Migration
                 'auto_increment' => true,
             ],
             'nom' => [
-                'type'       => 'TEXT',
+                'type'       => 'VARCHAR',
                 'null'       => false,
             ],
-            'description' => [
-                'type' => 'TEXT',
-                'null' => true,
-            ],
+            'mot_de_passe' => [
+                'type'       => 'TEXT',
+                'null'       => false,
+            ]
+            
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('departements');
+        $this->forge->createTable('utilisateur');
     }
 
     public function down()
     {
-        $this->forge->dropTable('departements');
+        $this->forge->dropTable('utilisateur');
     }
 }

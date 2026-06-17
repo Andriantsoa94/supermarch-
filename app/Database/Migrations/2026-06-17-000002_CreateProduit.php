@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateTypesConge extends Migration
+class CreateProduit extends Migration
 {
     public function up()
     {
@@ -13,25 +13,27 @@ class CreateTypesConge extends Migration
                 'type'           => 'INTEGER',
                 'auto_increment' => true,
             ],
-            'libelle' => [
-                'type'       => 'TEXT',
+            'designation' => [
+                'type'       => 'VARCHAR',
                 'null'       => false,
             ],
-            'jours_annuels' => [
-                'type'       => 'INTEGER',
+            
+            'prix' => [
+                'type'       => 'DECIMAL',
                 'null'       => false,
             ],
-            'deductible' => [
+            'stock' => [
                 'type'       => 'INTEGER',
-                'default'    => 0,
-            ],
+                'null'       => false,
+            ]
+            
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('types_conge');
+        $this->forge->createTable('produit');
     }
 
     public function down()
     {
-        $this->forge->dropTable('types_conge');
+        $this->forge->dropTable('produit');
     }
 }
