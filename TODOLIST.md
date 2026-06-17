@@ -99,6 +99,3 @@ $routes->post('/caisse/valider', 'CaisseController::valider_caisse');
 $routes->get('/achats', 'AchatController::index');
 $routes->post('/achats/ajouter', 'AchatController::ajouter');
 $routes->post('/achats/cloturer', 'AchatController::cloturer');
-
-
-4366
