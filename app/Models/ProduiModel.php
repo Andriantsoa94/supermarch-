@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class ProduiModel extends Model
 {
-    protected $table            = 'produis';
+    protected $table            = 'produit';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
@@ -44,8 +44,4 @@ class ProduiModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getAllProduit() {
-        $prod = $this->findAll();
-        return $prod;
-    }
 }
