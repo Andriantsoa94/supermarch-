@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateAchat extends Migration
+class CreatePanier extends Migration
 {
     public function up()
     {
@@ -13,24 +13,24 @@ class CreateAchat extends Migration
                 'type'           => 'INTEGER',
                 'auto_increment' => true,
             ],
-            'panier_id' => [
+            'produit_id' => [
                 'type'       => 'INTEGER',
                 'null'       => false,
             ],
             
-            'statut' => [
+            'quantite' => [
                 'type'       => 'INTEGER',
                 'null'       => false,
             ]
             
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('panier_id', 'panier', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('achat');
+        $this->forge->addForeignKey('produit_id', 'produit', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('panier');
     }
 
     public function down()
     {
-        $this->forge->dropTable('achat');
+        $this->forge->dropTable('panier');
     }
 }
