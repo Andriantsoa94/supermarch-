@@ -40,7 +40,6 @@
                     name="username"
                     id="username"
                     placeholder="admin"
-                    value="admin"
                     required
                     autocomplete="off"
                 >
@@ -57,7 +56,6 @@
                     name="password"
                     id="password"
                     placeholder="••••••••"
-                    value="admin123"
                     required
                 >
                 <div class="field-hint">

@@ -68,10 +68,6 @@ class AchatController extends BaseController
         return redirect()->to('/achats');
     }
 
-    /**
-     * Clôture l'achat en cours : passe le statut de toutes les lignes
-     * 'en_cours' de la caisse active à 'cloture'.
-     */
     public function cloturer()
     {
         $caisseId = session()->get('caisse_active');

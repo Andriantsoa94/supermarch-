@@ -32,7 +32,6 @@
             </div>
         <?php endif; ?>
 
-        <!-- Formulaire d'ajout produit -->
         <form class="form-inline" action="<?= base_url('/achats/ajouter') ?>" method="post">
 
             <div class="form-group">
