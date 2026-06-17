@@ -1,132 +1,104 @@
-# Todo List - Système de Gestion RH (CodeIgniter 4)
-
-Ce document détaille toutes les tâches nécessaires pour mener à bien le projet de système RH interne, en se basant sur les spécifications techniques.
-
----
-
-## Phase 1 : Initialisation du Projet et Base de Données (20 min)
-
-- [x] **Configuration de l'environnement**
-    - [x] Configurer le fichier `.env` pour utiliser la base de données SQLite.
-    - [x] S'assurer que le framework CodeIgniter 4 est correctement installé.
-
-- [x] **Migrations de la Base de Données**
-    - [x] Créer le fichier de migration pour la table `departements`.
-    - [x] Créer le fichier de migration pour la table `types_conge`.
-    - [x] Créer le fichier de migration pour la table `employes`.
-    - [x] Créer le fichier de migration pour la table `soldes`.
-    - [x] Créer le fichier de migration pour la table `conges`.
-    - [x] Exécuter la commande `php spark migrate` pour créer les tables.
-
-- [x] **Seeders (Données de test)**
-    - [x] Créer un seeder principal `DatabaseSeeder`.
-    - [x] Dans le seeder, ajouter :
-        - [x] 1 utilisateur `admin`.
-        - [x] 2 utilisateurs `employe`.
-        - [x] 1 utilisateur `rh`.
-        - [x] 2 `départements`.
-        - [x] 3 `types_conge` (ex: Payé, Maladie, Spécial).
-        - [x] Initialiser les soldes pour chaque employé pour chaque type de congé déductible.
-    - [x] Exécuter `php spark db:seed` pour peupler la base de données.
-
-- [x] **Routing Initial**
-    - [x] Définir les groupes de routes `/employe`, `/rh`, `/admin`.
-    - [x] Créer des contrôleurs squelettes (`EmployeController`, `RhController`, `AdminController`, `AuthController`).
+# 📋 TODO LIST DETAILEE : TD Caisse de Supermarché
+**Framework :** CodeIgniter 4 | **Base de données :** SQLite3 | **Promo :** P18 (Juin 2026)
 
 ---
 
-## Phase 2 : Authentification et Gestion des Rôles (40 min)
-
-- [x] **Système de Connexion/Déconnexion**
-    - [x] Créer la vue du formulaire de connexion (`login.php`).
-    - [x] Implémenter la méthode `login()` dans `AuthController` qui vérifie l'email et le mot de passe (`password_verify`).
-    - [x] Stocker les informations utilisateur (`id`, `nom`, `role`) dans la session CI4.
-    - [x] Implémenter la méthode `logout()` pour détruire la session.
-    - [x] Rediriger l'utilisateur vers son tableau de bord respectif après connexion.
-
-- [x] **Filtres et Sécurité**
-    - [x] Créer un filtre `AuthFilter` qui vérifie si un utilisateur est connecté.
-    - [x] Appliquer le filtre aux groupes de routes `/employe`, `/rh`, `/admin`.
-    - [x] Dans chaque méthode de contrôleur, vérifier le rôle de l'utilisateur pour s'assurer qu'il a les droits d'accès.
-    - [x] Activer la protection CSRF sur tous les formulaires.
+## Étape 1 : Base de Données SQLite (30 min)
+- [ ] Créer le fichier de base de données vide (ex: `caisse.db` dans `writable/` ou à la racine).
+- [ ] Rédiger et exécuter le script de création des tables (`schema.sql`) :
+  - [ ] **Table `caisse`** : `id` (INT Autoincrement), `numero` (INT/VARCHAR).
+  - [ ] **Table `produit`** : `id` (INT Autoincrement), `designation` (VARCHAR), `prix` (NUMERIC), `stock` (INT).
+  - [ ] **Table `achat`** : `id` (INT Autoincrement), `caisse_id` (INT), `produit_id` (INT), `quantite` (INT), `statut` (VARCHAR, ex: 'en_cours' ou 'cloture').
+  - [ ] **Table `utilisateur`** : `id` (INT Autoincrement), `username` (VARCHAR), `password` (VARCHAR).
+- [ ] Insérer les données de test obligatoires :
+  - [ ] **2 caisses** (ex: Caisse 1, Caisse 2).
+  - [ ] **5 produits** (ex: Biscuit [1000], Pain [400], Eau [1500], etc.).
+  - [ ] **1 utilisateur** pour le futur login (ex: admin / admin123).
 
 ---
 
-## Phase 3 : Espace Employé (60 min)
-
-- [x] **Tableau de bord Employé**
-    - [x] Afficher le solde de congés restant par type (`jours_attribues - jours_pris`).
-    - [x] Lister les demandes de congé de l'employé avec leur statut (`en_attente`, `approuvée`, `refusée`).
-
-- [x] **Soumission d'une Demande de Congé**
-    - [x] Créer le formulaire de demande (sélection du type de congé, date de début, date de fin, motif).
-    - [x] Dans le contrôleur :
-        - [x] Valider les données du formulaire (dates valides, solde suffisant, pas de chevauchement).
-        - [x] Calculer le nombre de jours ouvrables entre les dates.
-        - [x] Enregistrer la demande en base avec le statut `en_attente`.
-        - [x] Utiliser le pattern PRG (POST/Redirect/GET) avec un message flash de succès/erreur.
-
-- [x] **Annulation d'une Demande**
-    - [x] Ajouter un bouton "Annuler" pour les demandes avec le statut `en_attente`.
-    - [x] Implémenter la logique pour changer le statut à `annulee` ou supprimer la demande.
-
-- [x] **Profil Utilisateur**
-    - [x] Créer une page où l'employé peut modifier son nom et son mot de passe.
+## Étape 2 : Configuration & Architecture (30 min)
+- [ ] **Fichier `.env` ou `app/Config/Database.php`** :
+  - [ ] Passer l'environnement en mode `development`.
+  - [ ] Configurer le driver sur `SQLite3`.
+  - [ ] Renseigner le chemin absolu ou relatif vers `caisse.db`.
+- [ ] **Fichier `app/Config/App.php`** :
+  - [ ] Configurer `$baseURL` (ex: `http://localhost:8080/`).
+- [ ] **Dossier `app/Views/templates/`** (Découpage du template fourni) :
+  - [ ] Créer `header.php` (Inclure le CSS, la zone d'affichage dynamique de la caisse active via la session, et la barre de navigation).
+  - [ ] Créer `footer.php` (Fermeture des balises HTML, scripts JS facultatifs).
 
 ---
 
-## Phase 4 : Espace RH (50 min)
-
-- [x] **Tableau de bord RH**
-    - [x] Afficher la liste de toutes les demandes de congé avec le statut `en_attente`.
-    - [x] Permettre de filtrer les demandes par statut ou département.
-
-- [x] **Traitement des Demandes**
-    - [x] Sur la vue d'une demande, afficher les détails complets (employé, dates, motif, solde restant de l'employé).
-    - [x] Ajouter des boutons "Approuver" et "Refuser".
-    - [x] Implémenter la logique `approve()`:
-        - [x] Changer le statut de la demande à `approuvée`.
-        - [x] **Mettre à jour la table `soldes` en déduisant les jours (`jours_pris`).**
-        - [x] Enregistrer qui a traité la demande (`traite_par`).
-    - [x] Implémenter la logique `refuse()`:
-        - [x] Changer le statut de la demande à `refusée`.
-        - [x] Ajouter un commentaire optionnel expliquant le refus.
-        - [x] Le solde de l'employé reste intact.
+## Étape 3 : Choix de la Caisse (45 min)
+- [ ] **Modèle** : Créer `app/Models/CaisseModel.php`.
+- [ ] **Contrôleur** : Créer `app/Controllers/CaisseController.php`.
+  - [ ] Méthode `index()` : Charger `CaisseModel`, récupérer toutes les caisses avec `findAll()`, et envoyer les données à la vue de sélection.
+- [ ] **Vue** : Créer `app/Views/caisse/selection.php`.
+  - [ ] Intégrer la liste déroulante `<select name="caisse_id">` alimentée dynamiquement par la base de données.
+  - [ ] Ajouter le bouton **Valider**.
+- [ ] **Logique de Session (Dans `CaisseController`)** :
+  - [ ] Créer la méthode `valider_caisse()`.
+  - [ ] Récupérer le `caisse_id` envoyé en POST via `$this->request->getPost('caisse_id')`.
+  - [ ] Récupérer les détails de cette caisse et les stocker en session : `session()->set('caisse_active', $caisse);`.
+  - [ ] Rediriger l'utilisateur vers la page des achats : `return redirect()->to('/achats');`.
 
 ---
 
-## Phase 5 : Back-Office Administrateur (30 min)
-
-- [x] **Gestion des Employés (CRUD)**
-    - [x] Lister tous les employés avec leurs informations (rôle, département).
-    - [x] Créer un formulaire pour ajouter un nouvel employé.
-    - [x] Créer un formulaire pour modifier un employé existant (changer son rôle, département, etc.).
-    - [x] Implémenter une fonctionnalité pour "désactiver" un employé (`actif = 0`).
-
-- [x] **Gestion des Entités**
-    - [x] CRUD complet pour les `départements`.
-    - [x] CRUD complet pour les `types_conge`.
-
-- [x] **Tableau de Bord Admin**
-    - [x] Afficher un résumé des absences du mois en cours.
-    - [x] Permettre d'ajuster manuellement le solde de congés d'un employé.
+## Étape 4 : Saisie des Achats (1h45)
+- [ ] **Modèles** : 
+  - [ ] Créer `app/Models/ProduitModel.php`.
+  - [ ] Créer `app/Models/AchatModel.php` (Écrire une méthode personnalisée `getAchatsEnCours($caisse_id)` qui fait un `$this->select(...)->join('produit', ...)->where(...)` pour récupérer la désignation et le prix unitaire).
+- [ ] **Contrôleur** : Créer `app/Controllers/AchatController.php`.
+  - [ ] Dans le constructeur ou la méthode : vérifier si `session()->has('caisse_active')`. Si absent -> rediriger immédiatement vers le choix de la caisse (`/caisse`).
+  - [ ] Méthode `index()` :
+    - [ ] Récupérer la liste de tous les produits (pour le formulaire du haut).
+    - [ ] Récupérer les achats en cours associés à la caisse active (pour le tableau du bas).
+    - [ ] Calculer la somme totale des montants (`prix * quantite`) cumulés.
+    - [ ] Envoyer toutes ces données à la vue.
+- [ ] **Vue** : Créer `app/Views/achats/saisie.php`.
+  - [ ] **Partie Haute : Formulaire d'ajout (60 min)** :
+    - [ ] Créer le formulaire avec le `<select name="produit_id">` bouclant sur les produits disponibles.
+    - [ ] Ajouter le champ de saisie numérique `<input type="number" name="quantite" min="1">`.
+    - [ ] Ajouter le bouton **Valider** pointant vers la route d'ajout.
+  - [ ] **Partie Basse : Tableau récapitulatif (45 min)** :
+    - [ ] Créer la structure du tableau HTML (`Produit`, `Prix Unit`, `Qté`, `Montant`).
+    - [ ] Faire une boucle `foreach` sur les achats en cours récupérés.
+    - [ ] Afficher la ligne `Total` finale en affichant la variable de somme calculée dans le contrôleur.
+- [ ] **Logique d'Ajout (Dans `AchatController`)** :
+  - [ ] Créer la méthode `ajouter()`.
+  - [ ] Récupérer les données POST (`produit_id`, `quantite`) ainsi que le `caisse_id` stocké en session.
+  - [ ] Insérer une nouvelle ligne dans la table `achat` avec le statut 'en_cours'.
+  - [ ] Rediriger vers la page principale des achats : `return redirect()->to('/achats');`.
 
 ---
 
-## Phase 6 : Finalisation et Finitions (20 min)
+## Étape 5 : Fonctionnalités Avancées (Travaux à faire 4)
+- [ ] **Authentification (Écran de Login)** :
+  - [ ] Créer `app/Controllers/AuthController.php` (Méthodes `login()` pour afficher la vue et `authentifier()` pour vérifier les identifiants en base).
+  - [ ] Créer la vue de connexion `app/Views/auth/login.php`.
+  - [ ] Mettre à jour la session en cas de succès : `session()->set('isLoggedIn', true);`.
+  - [ ] Ajouter un filtre ou une condition stricte pour interdire l'accès à l'application si l'utilisateur n'est pas connecté.
+- [ ] **Bouton "Clôturer Achat"** :
+  - [ ] Ajouter le bouton `<button>` ou lien de clôture juste en dessous du tableau récapitulatif dans `app/Views/achats/saisie.php`.
+  - [ ] Créer la méthode `cloturer()` dans `AchatController.php`.
+  - [ ] Exécuter une requête de mise à jour (`UPDATE`) dans la table `achat` pour passer le statut de 'en_cours' à 'cloture' pour toutes les lignes correspondant à l'ID de la caisse active.
+  - [ ] Rediriger vers `/achats` (le tableau se rechargera vide, prêt pour le client suivant).
 
-- [x] **Interface et Expérience Utilisateur**
-    - [x] Créer un layout de base (`app.php`) avec une barre de navigation/sidebar.
-    - [x] La sidebar doit afficher des liens différents en fonction du rôle de l'utilisateur.
-    - [x] S'assurer que les messages flash (succès, erreur) sont affichés correctement.
-    - [x] Soigner la présentation des vues.
+---
 
-- [x] **Documentation**
-    - [x] Mettre à jour le fichier `README.md`.
-    - [x] Inclure les instructions d'installation (`composer install`, `php spark migrate`, `php spark db:seed`).
-    - [x] Fournir les identifiants pour le compte `admin` et un compte `employe` de test.
+## Configuration des Routes (`app/Config/Routes.php`)
+Assurer l'enchaînement des écrans en déclarant les routes suivantes :
+```php
+$routes->get('/', 'AuthController::login');
+$routes->post('/auth/authentifier', 'AuthController::authentifier');
 
-- [x] **Vérification Finale**
-    - [x] Tester le workflow complet d'une demande de congé.
-    - [x] Vérifier que les soldes sont correctement mis à jour.
-    - [x] S'assurer que les restrictions de rôle sont bien appliquées partout.
+$routes->get('/caisse', 'CaisseController::index');
+$routes->post('/caisse/valider', 'CaisseController::valider_caisse');
+
+$routes->get('/achats', 'AchatController::index');
+$routes->post('/achats/ajouter', 'AchatController::ajouter');
+$routes->post('/achats/cloturer', 'AchatController::cloturer');
+
+
+4366
